@@ -1,5 +1,13 @@
-import { QMainWindow, QWidget, QLabel, FlexLayout, QPushButton, QIcon } from '@nodegui/nodegui';
-import logo from '../assets/logox200.png';
+import {
+  QMainWindow,
+  QWidget,
+  QLabel,
+  FlexLayout,
+  QPushButton,
+  QIcon,
+} from "@nodegui/nodegui";
+import logo from "../assets/logox200.png";
+import { signMessage } from "./sign";
 
 const win = new QMainWindow();
 win.setWindowTitle("Hello World");
@@ -17,14 +25,22 @@ const button = new QPushButton();
 button.setIcon(new QIcon(logo));
 
 const label2 = new QLabel();
-label2.setText("World");
+label2.setText("World Eric!2");
 label2.setInlineStyle(`
   color: red;
+`);
+
+const label3 = new QLabel();
+
+label3.setText(signMessage("deadbeef"));
+label2.setInlineStyle(`
+  font-size: 24;
 `);
 
 rootLayout.addWidget(label);
 rootLayout.addWidget(button);
 rootLayout.addWidget(label2);
+rootLayout.addWidget(label3);
 win.setCentralWidget(centralWidget);
 win.setStyleSheet(
   `
@@ -42,5 +58,4 @@ win.setStyleSheet(
   `
 );
 win.show();
-
 (global as any).win = win;
